@@ -1,114 +1,927 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dealer Complete Hub | Modern Dealer Services</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dealer Complete Hub — Your Modern Dealer Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #4ade80;
+    --green-dark: #22c55e;
+    --green-light: rgba(74,222,128,0.12);
+    --green-pale: rgba(74,222,128,0.06);
+    --ink: #f0f4f8;
+    --ink-mid: #cbd5e1;
+    --muted: #94a3b8;
+    --border: rgba(148,163,184,0.15);
+    --border-bright: rgba(74,222,128,0.25);
+    --white: #0d1117;
+    --surface: #111827;
+    --surface2: #1e2a3a;
+    --surface3: #162032;
+    --navy: #060d16;
+    --card: #131e2e;
+    --card2: #1a2840;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 5vw;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(6,13,22,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 30px rgba(0,0,0,0.5); }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo-mark {
+    width: 32px; height: 32px;
+    background: var(--green);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: #060d16;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    background: var(--green) !important;
+    color: #060d16 !important;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--green-dark) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 110px 5vw 80px;
+    display: flex;
+    align-items: center;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 75% 40%, rgba(74,222,128,0.09) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 50% at 5% 90%, rgba(56,189,248,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(99,102,241,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 100%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-light);
+    border: 1px solid var(--border-bright);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero h1 span { color: var(--green); }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 44px;
+    font-weight: 400;
+    line-height: 1.75;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green);
+    color: #060d16;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--ink);
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid rgba(148,163,184,0.25);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-secondary:hover { border-color: var(--green); background: var(--green-light); color: var(--green); }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 60px;
+    padding-top: 44px;
+    border-top: 1px solid rgba(148,163,184,0.12);
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+
+  /* STRIP */
+  .services-strip {
+    background: #060d16;
+    border-top: 1px solid rgba(74,222,128,0.08);
+    border-bottom: 1px solid rgba(74,222,128,0.08);
+    padding: 14px 5vw;
+    display: flex;
+    overflow: hidden;
+  }
+  .strip-track {
+    display: flex;
+    gap: 48px;
+    animation: scroll-strip 20s linear infinite;
+    white-space: nowrap;
+  }
+  .strip-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+  .strip-dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
+  @keyframes scroll-strip {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 5vw; }
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.8;
+  }
+
+  /* PURPOSE */
+  .purpose { background: var(--surface); }
+  .purpose-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .purpose-card-big {
+    background: linear-gradient(135deg, #0f1f35 0%, #0d1829 100%);
+    border: 1px solid rgba(74,222,128,0.15);
+    border-radius: 20px;
+    padding: 44px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .purpose-card-big::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(74,222,128,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .big-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .big-num-label { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+  .purpose-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(74,222,128,0.12);
+    color: var(--green);
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    margin-top: 16px;
+  }
+  .mini-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .mini-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .mini-card-icon {
+    width: 36px; height: 36px;
+    background: var(--green-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 10px;
+    color: var(--green);
+  }
+  .mini-card-title { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .mini-card-body { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  /* SERVICES */
+  .services { background: var(--navy); }
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .service-card {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    background: var(--card);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    border-color: var(--border-bright);
+  }
+  .service-card.featured {
+    background: linear-gradient(145deg, #0a2010 0%, #0d2918 100%);
+    border-color: rgba(74,222,128,0.3);
+  }
+  .service-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: var(--green-light);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    color: var(--green);
+  }
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .service-card.featured h3 { color: #e8fdf0; }
+  .service-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+  .service-card.featured p { color: rgba(200,255,220,0.6); }
+  .service-list { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .service-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .service-card.featured .service-list li { color: rgba(180,240,200,0.75); }
+  .check {
+    width: 18px; height: 18px;
+    background: var(--green-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .service-card.featured .check { background: rgba(74,222,128,0.2); }
+  .check svg { width: 10px; height: 10px; color: var(--green); }
+
+  /* MERCHANT */
+  .merchant-section { background: var(--surface); }
+  .merchant-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .steps-list { display: flex; flex-direction: column; gap: 0; margin-top: 36px; }
+  .step-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(148,163,184,0.1);
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--green);
+    background: var(--green-light);
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .step-text { font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
+  .step-text strong { color: var(--ink); font-weight: 600; }
+  .merchant-visual {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .mv-header {
+    background: linear-gradient(90deg, #0a2010 0%, #091c0e 100%);
+    border-bottom: 1px solid rgba(74,222,128,0.15);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mv-title { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--ink); }
+  .mv-badge { background: rgba(74,222,128,0.15); color: var(--green); font-size: 0.75rem; padding: 4px 10px; border-radius: 100px; }
+  .mv-body { padding: 28px; }
+  .mv-stat-row { display: flex; justify-content: space-between; margin-bottom: 28px; }
+  .mv-stat { text-align: center; }
+  .mv-stat-val { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--ink); }
+  .mv-stat-val.green { color: var(--green); }
+  .mv-stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .savings-bar-wrap { margin-bottom: 20px; }
+  .savings-bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-bottom: 8px; }
+  .savings-bar-bg { height: 10px; background: rgba(148,163,184,0.1); border-radius: 100px; overflow: hidden; }
+  .savings-bar-fill { height: 100%; background: var(--green); border-radius: 100px; }
+  .mv-note { font-size: 0.8rem; color: var(--muted); text-align: center; padding-top: 16px; border-top: 1px solid var(--border); }
+
+  /* PARTS */
+  .parts-section { background: var(--navy); }
+  .parts-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .parts-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .tile {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    background: var(--card);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .tile:hover { border-color: var(--border-bright); background: var(--card2); }
+  .tile-icon {
+    width: 40px; height: 40px;
+    background: var(--green-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+    color: var(--green);
+  }
+  .tile h4 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .tile p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* CONTACT */
+  .contact-section { background: var(--surface); }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-info { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+  .contact-row { display: flex; align-items: center; gap: 14px; font-size: 0.9rem; color: var(--muted); }
+  .contact-row-icon {
+    width: 38px; height: 38px;
+    background: var(--green-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--green);
+    flex-shrink: 0;
+  }
+  .contact-row a { color: var(--ink); text-decoration: none; }
+  .contact-row a:hover { color: var(--green); }
+  .form-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 36px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 0.8rem; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  input, textarea {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--ink);
+    background: var(--surface);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(148,163,184,0.35); }
+  input:focus, textarea:focus { border-color: var(--green); background: var(--card2); }
+  textarea { resize: vertical; min-height: 110px; }
+  .form-submit { margin-top: 20px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(148,163,184,0.08);
+    padding: 36px 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-brand { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--ink); font-size: 1rem; display: flex; align-items: center; gap: 10px; }
+  .footer-copy { font-size: 0.82rem; color: rgba(148,163,184,0.4); }
+  .footer-links { display: flex; gap: 24px; list-style: none; }
+  .footer-links a { font-size: 0.82rem; color: rgba(148,163,184,0.45); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .d1 { animation-delay: 0.1s; }
+  .d2 { animation-delay: 0.2s; }
+  .d3 { animation-delay: 0.35s; }
+  .d4 { animation-delay: 0.5s; }
+  .d5 { animation-delay: 0.65s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .purpose-inner, .merchant-inner, .parts-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 24px; }
+    .parts-tiles { grid-template-columns: 1fr 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: 1; }
+  }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">Dealer Complete Hub</a>
-      <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
-      <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <section class="hero section-hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Dealer Growth Partner</p>
-          <h1>Modern tools, trusted support, and results designed for dealers.</h1>
-          <p class="hero-text">Dealer Complete Hub helps dealerships optimize payments, source parts faster, and grow revenue with a polished digital experience.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="contact.html">Get Started</a>
-            <a class="button button-secondary" href="services.html">Explore Services</a>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">D</div>
+    Dealer Complete Hub
+  </a>
+  <ul class="nav-links">
+    <li><a href="#purpose">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#merchant">Merchant</a></li>
+    <li><a href="#parts">Parts</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-up d1">Your Modern Dealer Partner</div>
+    <h1 class="fade-up d2">Building Trust,<br>Delivering <span>Valuable</span><br>Resources to Dealers</h1>
+    <p class="hero-sub fade-up d3">DealerCompleteHub fuels dealership success by delivering powerful solutions that boost revenue, streamline operations, and spark long-term growth.</p>
+    <div class="hero-actions fade-up d4">
+      <a href="#services" class="btn-primary">
+        Explore Services
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+    <div class="hero-stats fade-up d5">
+      <div class="stat-item">
+        <div class="stat-num">50%</div>
+        <div class="stat-label">Avg. processing fee reduction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">$0</div>
+        <div class="stat-label">Equipment program costs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Real-time transaction reporting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="services-strip">
+  <div class="strip-track">
+    <span class="strip-item"><span class="strip-dot"></span>Merchant Services</span>
+    <span class="strip-item"><span class="strip-dot"></span>Auto Parts Delivery</span>
+    <span class="strip-item"><span class="strip-dot"></span>Compliant Surcharging</span>
+    <span class="strip-item"><span class="strip-dot"></span>White-Glove Onboarding</span>
+    <span class="strip-item"><span class="strip-dot"></span>Real-Time Reporting</span>
+    <span class="strip-item"><span class="strip-dot"></span>Revenue Growth</span>
+    <span class="strip-item"><span class="strip-dot"></span>Operational Excellence</span>
+    <span class="strip-item"><span class="strip-dot"></span>Merchant Services</span>
+    <span class="strip-item"><span class="strip-dot"></span>Auto Parts Delivery</span>
+    <span class="strip-item"><span class="strip-dot"></span>Compliant Surcharging</span>
+    <span class="strip-item"><span class="strip-dot"></span>White-Glove Onboarding</span>
+    <span class="strip-item"><span class="strip-dot"></span>Real-Time Reporting</span>
+    <span class="strip-item"><span class="strip-dot"></span>Revenue Growth</span>
+    <span class="strip-item"><span class="strip-dot"></span>Operational Excellence</span>
+  </div>
+</div>
+
+<!-- PURPOSE -->
+<section class="purpose" id="purpose">
+  <div class="purpose-inner">
+    <div>
+      <span class="section-label">Our Purpose</span>
+      <h2 class="section-title">Move Faster.<br>Think Smarter.<br>Lead with Confidence.</h2>
+      <p class="section-lead">We're here to help dealers navigate a competitive market with tools, services, and expertise that make a real difference — from the service lane to the finance office.</p>
+    </div>
+    <div>
+      <div class="purpose-card-big">
+        <div class="big-num">2&times;</div>
+        <div class="big-num-label">Faster operations with our integrated platform</div>
+        <p style="font-size:0.9rem; color:rgba(255,255,255,0.55); line-height:1.7;">Streamlined workflows mean your team spends less time on admin and more time selling.</p>
+        <div class="purpose-tag">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 11.1l-3.7 2.4 1.4-4.3L2 6.5h4.5z"/></svg>
+          Trusted dealer partner since day one
+        </div>
+      </div>
+      <div class="mini-cards">
+        <div class="mini-card">
+          <div class="mini-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          </div>
+          <div class="mini-card-title">Merchant Solutions</div>
+          <div class="mini-card-body">Cut credit card fees in half with compliant processing.</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h14M5 12h6m-6 4h4M3 4h18v16H3z"/></svg>
+          </div>
+          <div class="mini-card-title">Parts Network</div>
+          <div class="mini-card-body">Fastest delivery at the best dealer pricing available.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <span class="section-label">What We Offer</span>
+      <h2 class="section-title">Solutions Built<br>for Dealerships</h2>
+    </div>
+    <a href="#contact" class="btn-secondary">Speak to an Advisor</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card featured">
+      <div class="service-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      </div>
+      <h3>Dealer Merchant Services</h3>
+      <p>Real credit card processing built specifically for automotive dealers — cut your fees in half and keep more of every sale.</p>
+      <ul class="service-list">
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>In-person installation &amp; white-glove onboarding</li>
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Free equipment programs — zero upfront costs</li>
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Compliant surcharging program included</li>
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Real-time reporting &amp; fee tracking</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3M9 21H19a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
+      </div>
+      <h3>Consumer Auto Parts</h3>
+      <p>Get the fastest delivery at the best prices on dealer parts — keeping your service lane moving without delays.</p>
+      <ul class="service-list">
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Expedited parts delivery network</li>
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Dealer-exclusive pricing tiers</li>
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>OEM and aftermarket availability</li>
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Real-time order tracking</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Dealership Operations</h3>
+      <p>Comprehensive resources and solutions to streamline every department — from finance to fixed operations.</p>
+      <ul class="service-list">
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Revenue optimization strategies</li>
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Operations consulting &amp; support</li>
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Technology integration guidance</li>
+        <li><span class="check"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 5l2.5 2.5L8.5 2.5"/></svg></span>Long-term growth partnerships</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MERCHANT DETAIL -->
+<section class="merchant-section" id="merchant">
+  <div class="merchant-inner">
+    <div>
+      <span class="section-label">Merchant Services</span>
+      <h2 class="section-title">Cut Your Processing Fees in Half</h2>
+      <p class="section-lead">Real Merchant Dealer Services is designed specifically for automotive dealerships — not generic small businesses. Every feature is built around how dealers actually operate.</p>
+      <div class="steps-list">
+        <div class="step-item"><div class="step-num">01</div><div class="step-text"><strong>In-person installation</strong> and white-glove onboarding so you're up and running with zero friction.</div></div>
+        <div class="step-item"><div class="step-num">02</div><div class="step-text"><strong>Free equipment programs</strong> designed to eliminate your upfront hardware investment entirely.</div></div>
+        <div class="step-item"><div class="step-num">03</div><div class="step-text"><strong>Compliant surcharging</strong> that legally passes processing costs to the card, protecting your margins.</div></div>
+        <div class="step-item"><div class="step-num">04</div><div class="step-text"><strong>Real-time reporting</strong> with clear visibility into every transaction and processing fee, precision guaranteed.</div></div>
+        <div class="step-item"><div class="step-num">05</div><div class="step-text"><strong>Card-not-present portal</strong> — effortlessly handle remote payments through an intuitive, secure interface.</div></div>
+      </div>
+    </div>
+    <div class="merchant-visual">
+      <div class="mv-header">
+        <div class="mv-title">Monthly Savings Overview</div>
+        <div class="mv-badge">Live Dashboard</div>
+      </div>
+      <div class="mv-body">
+        <div class="mv-stat-row">
+          <div class="mv-stat">
+            <div class="mv-stat-val">$8,400</div>
+            <div class="mv-stat-label">Avg. monthly fees (before)</div>
+          </div>
+          <div class="mv-stat">
+            <div class="mv-stat-val green">$4,100</div>
+            <div class="mv-stat-label">With Dealer Complete Hub</div>
+          </div>
+          <div class="mv-stat">
+            <div class="mv-stat-val green">51%</div>
+            <div class="mv-stat-label">Cost reduction</div>
           </div>
         </div>
-        <div class="hero-media">
-          <img src="https://images.unsplash.com/photo-1516908205727-40afad9449b6?auto=format&fit=crop&w=900&q=80" alt="Dealer services and technology" />
+        <div class="savings-bar-wrap">
+          <div class="savings-bar-label"><span>Standard processing fees</span><span>$8,400/mo</span></div>
+          <div class="savings-bar-bg"><div class="savings-bar-fill" style="width:100%; background:rgba(148,163,184,0.25);"></div></div>
         </div>
-      </div>
-    </section>
-
-    <section class="section section-overview">
-      <div class="container section-heading">
-        <h2>Everything dealers need in one place</h2>
-        <p>Streamline operations with high-performance payment solutions, inventory support, and service options built for modern dealerships.</p>
-      </div>
-      <div class="container card-grid">
-        <article class="feature-card">
-          <h3>Lower payment costs</h3>
-          <p>Reduce credit card and merchant processing fees while improving checkout speed and security.</p>
-        </article>
-        <article class="feature-card">
-          <h3>Fast parts delivery</h3>
-          <p>Access a nationwide dealer parts network with reliable pricing and expedited fulfillment.</p>
-        </article>
-        <article class="feature-card">
-          <h3>Clear dealer guidance</h3>
-          <p>Get actionable support and expert advice that helps you run a stronger, more profitable operation.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section-services-preview">
-      <div class="container section-heading">
-        <h2>Our most popular dealer services</h2>
-        <p>Choose the tools that fit your needs and help your dealership outperform the competition.</p>
-      </div>
-      <div class="container service-grid">
-        <article class="service-card">
-          <h3>Payment & Merchant Services</h3>
-          <p>Competitive processing rates, fast setup, and streamlined reporting for all dealer transactions.</p>
-        </article>
-        <article class="service-card">
-          <h3>Dealer Parts Supply</h3>
-          <p>Premium parts sourcing with rapid shipping, competitive pricing, and easy order management.</p>
-        </article>
-        <article class="service-card">
-          <h3>Dealership Strategy</h3>
-          <p>Operational guidance, revenue growth planning, and digital resources tailored to your dealership.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section-cta-alt">
-      <div class="container cta-alt">
-        <div>
-          <h2>Ready to modernize your dealership?</h2>
-          <p>Partner with Dealer Complete Hub and unlock faster service, smarter operations, and stronger cashflow.</p>
+        <div class="savings-bar-wrap">
+          <div class="savings-bar-label"><span>With DCH merchant services</span><span>$4,100/mo</span></div>
+          <div class="savings-bar-bg"><div class="savings-bar-fill" style="width:49%;"></div></div>
         </div>
-        <a class="button button-primary" href="contact.html">Contact Our Team</a>
+        <div class="mv-note">Average savings based on $500K/month in card volume</div>
       </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <p class="footer-brand">Dealer Complete Hub</p>
-        <p>Trusted by dealers for practical service, better pricing, and measurable growth.</p>
-      </div>
-      <nav class="footer-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-      </nav>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- PARTS -->
+<section class="parts-section" id="parts">
+  <div class="parts-inner">
+    <div>
+      <span class="section-label">Auto Parts</span>
+      <h2 class="section-title">The Parts You Need,<br>When You Need Them</h2>
+      <p class="section-lead">Our consumer auto parts network gives dealers access to the fastest delivery and most competitive pricing — keeping your service lane profitable and your customers happy.</p>
+      <a href="#contact" class="btn-primary" style="margin-top:32px; display:inline-flex;">
+        Get Parts Pricing
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+    <div class="parts-tiles">
+      <div class="tile">
+        <div class="tile-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h4>Fast Delivery</h4>
+        <p>Industry-leading fulfillment speeds to minimize vehicle downtime.</p>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14l-4-4 1.41-1.41L10 13.17l6.59-6.59L18 8l-8 8z"/></svg>
+        </div>
+        <h4>Best Pricing</h4>
+        <p>Dealer-exclusive rates you won't find at any retail channel.</p>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        </div>
+        <h4>OEM &amp; Aftermarket</h4>
+        <p>Full catalog coverage across all major makes and models.</p>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        </div>
+        <h4>Order Tracking</h4>
+        <p>Live visibility from order placement to your service bay door.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div>
+      <span class="section-label">Get in Touch</span>
+      <h2 class="section-title">We're Here<br>to Help</h2>
+      <p class="section-lead">Whether you're exploring merchant services or need help with parts, our team is ready to show you how Dealer Complete Hub can work for your dealership.</p>
+      <div class="contact-info">
+        <div class="contact-row">
+          <div class="contact-row-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <a href="mailto:info@dealercompletehub.com">info@dealercompletehub.com</a>
+        </div>
+        <div class="contact-row">
+          <div class="contact-row-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span>Response within 1 business day</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-card">
+      <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1.2rem; color:var(--ink); margin-bottom:24px;">Send Us a Message</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="John">
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Smith">
+        </div>
+        <div class="form-group full">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@dealership.com">
+        </div>
+        <div class="form-group full">
+          <label for="subject">Interested In</label>
+          <input type="text" id="subject" placeholder="Merchant services / Parts / General inquiry">
+        </div>
+        <div class="form-group full">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us about your dealership and how we can help..."></textarea>
+        </div>
+      </div>
+      <div class="form-submit">
+        <button type="button" class="btn-primary" style="width:100%; justify-content:center;" onclick="handleSubmit(this)">
+          Send Message
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="nav-logo-mark">D</div>
+    Dealer Complete Hub
+  </div>
+  <span class="footer-copy">&copy; 2026 Dealer Complete Hub. All rights reserved.</span>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  function handleSubmit(btn) {
+    btn.textContent = '✓  Message Sent!';
+    btn.style.background = 'var(--green-dark)';
+    btn.disabled = true;
+  }
+</script>
 </body>
 </html>
